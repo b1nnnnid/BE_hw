@@ -1,5 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Post
+from django.views.generic import ListView
+
+class ListView(ListView):
+    queryset=Post.objects.all().order_by('name')
+    template_name='phone/list.html'
+    context_object_name='phones'
 
 def list(request):
     phones = Post.objects.all().order_by('name')
@@ -58,3 +64,8 @@ def delete(request,id):
         phone.delete()
         return redirect('phone:list')
     return render(request,'phone/delete.html', {"phone":phone})
+
+class IndexView(ListView):
+    queryset=Post.objects.all().order_by('name')
+    template_name='phone/list.html'
+    context_object_name='phone'
