@@ -65,7 +65,3 @@ def delete(request,id):
         return redirect('phone:list')
     return render(request,'phone/delete.html', {"phone":phone})
 
-class IndexView(ListView):
-    queryset=Post.objects.all().order_by('name')
-    template_name='phone/list.html'
-    context_object_name='phone'
